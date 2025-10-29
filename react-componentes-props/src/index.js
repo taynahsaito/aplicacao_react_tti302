@@ -4,8 +4,21 @@ import { createRoot } from "react-dom/client";
 import 'bootstrap/dist/css/bootstrap.min.css'
 //acesso a alguns icones
 import '@fortawesome/fontawesome-free/css/all.css'
+//importando o arquivo para 
+import Pedido from './Pedido'
+import Cartao from './Cartao'
+import Feedback from './Feedback'
 
+//componente = uma constante ou variavel que guarda uma função que retorna o codigo de interface grafica (JSX, HTML)
 const App = () => {
+    const textoOK = "Já chegou"
+    const textoNOK = "Ainda não chegou"
+    //função alert já vem do javascript
+    const funcaoOK = () => alert("Agradecemos a confirmação")
+    const funcaoNOK = () => alert("Verificaremos o ocorrido")
+    //poderiamos passar os parametros direto, mas fazemos assim para ficar um pouco mais modular
+    const componenteFeedback = <Feedback textoOK={textoOK} textoNOK={textoNOK} funcaoOK={funcaoOK} funcaoNOK = {funcaoNOK}></Feedback>
+
     //JSX = syntax sugar para traduzir para código javascript bruto, o tradutor se chama 'babel' (compilador)
     return (
         //container principal
@@ -29,65 +42,34 @@ const App = () => {
                     md = aprox. 720px de largura
                 */}
                 <div className="col-sm-8 col-md-6 m-2">
+                    {/* instancia do componente pedido */}
+                    <Cartao cabecalho="22/04/2021">
+                        <Pedido icone="fas fa-hdd fa-2x" titulo="SSD" descricao="SSD Kingston A400 - SATA"/>
+                        {componenteFeedback}                 
+                    </Cartao>
                 </div>
             </div>
 
             {/* segundo pedido */} 
             <div className="row">
                 <div className="col-sm-8 col-md-6 m-2">
-                    {/* cartão */}
-                    <div className="card">
-                        {/* cabeçalho do cartão */}
-                        <div className="card-header text-muted">
-                            20/04/2021
-                        </div>
-                        {/* corpo do cartão */}
-                        <div className="card-body d-flex">
-                            <div className="d-flex align-items-center">
-                                {/* icone do cartão */}
-                                {/* fas fa-hdd fa-2x = pacotes do fontawesome */}
-                                <i className="fas fa-book fa-2x"></i>
-                            </div>
-                            {/* flex-grow 1: tomar espaço remanescente */}
-                            {/* informações do pedido */}
-                            <div className="flex-grow-1 ms-2 border">
-                                <h4 className="text-center">Livro</h4>
-                                <p className="text-center">Concrete Mathematics - Donald Knuth</p>
-                            </div>
-                        </div>
-                    </div>
+                    <Cartao cabecalho="20/04/2021">
+                        <Pedido icone="fas fa-book fa-2x" titulo="Livro" descricao="Concrete Mathematics - Donald Knuth" />
+                        {componenteFeedback}        
+                    </Cartao>
                 </div>
             </div>
             
             {/* terceiro pedido */} 
             <div className="row">
                 <div className="col-sm-8 col-md-6 m-2">
-                    {/* cartão */}
-                    <div className="card">
-                        {/* cabeçalho do cartão */}
-                        <div className="card-header text-muted">
-                            21/01/2021
-                        </div>
-                        {/* corpo do cartão */}
-                        <div className="card-body d-flex">
-                            <div className="d-flex align-items-center">
-                                {/* icone do cartão */}
-                                {/* fas fa-hdd fa-2x = pacotes do fontawesome */}
-                                <i className="fas fa-laptop fa-2x"></i>
-                            </div>
-                            {/* flex-grow 1: tomar espaço remanescente */}
-                            {/* informações do pedido */}
-                            <div className="flex-grow-1 ms-2 border">
-                                <h4 className="text-center">Notebook</h4>
-                                <p className="text-center">Notebook Dell - 8Gb - i5</p>
-                            </div>
-                        </div>
-                    </div>
+                    <Cartao cabecalho="21/01/20211">
+                        <Pedido icone="fas fa-laptop fa-2x" titulo="Notebook" descricao="Notebook Dell - 8Gb - i5" />
+                        {componenteFeedback}        
+                    </Cartao>
                 </div>
             </div>
-
         </div>
-
     );
 }
 
