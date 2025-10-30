@@ -14,5 +14,5 @@ const Feedback = (props) => {
         </div>
     );
 }
-
+//exportar para outros arquivos de codigo dentro do projeto
 export default Feedback;
