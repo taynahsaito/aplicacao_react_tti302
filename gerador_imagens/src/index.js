@@ -1,4 +1,4 @@
-//index.js - coloca o backend do projeto em execução
+//index.js - raiz da minha aplicação
 
 import React from "react";
 import App from './components/App'
