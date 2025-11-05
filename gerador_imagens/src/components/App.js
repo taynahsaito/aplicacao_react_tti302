@@ -5,17 +5,25 @@ import Busca from './Busca'
 import env from 'react-dotenv'
 //importando o metodo para criar um cliente de conexão à api do pexels
 import {createClient} from 'pexels'
+import ListaImagens from "./ListaImagens";
+import PexelsLogo from "./PexelsLogo";
 
 //mesma coisa de criar uma constante, usamos o export default na propria assinatura do metodo
 //substitui o export default App no final do codigo, sem precisarmos nomear uma constante
 export default class App extends Component {
+    //estado de App será formado pela lista de fotos que o pexels retorna
+    state = {
+        pics: []
+    }
 
     onBuscaRealizada = (termo) => {
         //pesquisando fotos dentro da api do pexels
         this.pexelsClient.photos.search({
             //query - qual é o termo que o usuario está pesquisando
             query: termo
-        }).then(pics => console.log(pics))
+            //this.setState = estado dessa classe app
+            //setState atualiza o estado atual do componente
+        }).then(pics => this.setState({pics: pics.photos}))
     }
     
     pexelsClient = null
@@ -35,10 +43,17 @@ export default class App extends Component {
             //m-auto = margem automática para todos os lados da div, calculada de acordo com o tamanho da tela
             <div className="grid justify-content-center m-auto w-9 border-round border-1 border-400">
                 <div className="col-12">
+                    <PexelsLogo/>
+                </div>
+                <div className="col-12">
                     <h1>Exibir uma lista de... </h1>
                 </div>
                 <div className="col-8">
                     <Busca onBuscaRealizada={this.onBuscaRealizada}/>
+                </div>
+
+                <div className="col-8">
+                   <ListaImagens pics={this.state.pics}/>
                 </div>
             </div>
         )   
