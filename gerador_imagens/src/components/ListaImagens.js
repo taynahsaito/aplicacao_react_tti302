@@ -4,7 +4,7 @@ import Imagem from "./Imagem";
 //aqui estamos refatorando o codigo para ficar mais dinâmico
 
 //componente funcional
-const ListaImagens = ({pics}) => {
+const ListaImagens = ({pics, imgStyle}) => {
     //return retorna codigo JSX
     return(
         //pegando a coleção de fotos que está dentro de pics e mapeamos esses elementos
@@ -15,7 +15,7 @@ const ListaImagens = ({pics}) => {
 
         pics.map((pic, key) => (
             //pic recebe o link na versao small da foto
-            <Imagem pic={pic.src.small} key={key}/>
+            <Imagem imgStyle={imgStyle} pic={pic.src.small} key={key}/>
         ))
     )
 }
